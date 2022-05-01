@@ -85,8 +85,10 @@ int main()
 {
 
 	// Testing sending data
-	for(int i = 0; i < 256; i++)
-		ram[i] = 255 - i;
+	int16_t test = 32000;
+	ram[0] = (uint8_t)test >> 8;
+	ram[1] = (uint8_t)test;
+	ram[3] = 69;
 
 	// Set the led up to know Pi is alive
 	gpio_init(LED_PIN);

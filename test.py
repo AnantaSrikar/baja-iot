@@ -31,7 +31,6 @@ def i2cNoPullUp():
 
 try:
 	i2c = I2C(board.GP15, board.GP14) # First SCL, then SDA
-	i2c2 = I2C(board.GP1, board.GP0)
 except RuntimeError:
 	i2cNoPullUp()
 except Exception as e:
@@ -43,5 +42,8 @@ if(not i2c.try_lock()):
 
 while(True):
 	print(i2c.scan())
+	test = bytearray(256)
+	i2c.readfrom_into(0x32, test)
+	print(list(test))
 	
 	sleep(1)
